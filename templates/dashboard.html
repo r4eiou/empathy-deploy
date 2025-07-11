@@ -1,11 +1,45 @@
-<!-- dashboard.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dashboard</title>
+  <title>Dashboard | EMPATHY</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <h1>Welcome to the Dashboard, {{ session.user_name }}!</h1>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <h1 class="logo">EMPATHY</h1>
+    </div>
+    <div class="navbar-right">
+      <div class="profile-icon">
+        <img src="{{ url_for('static', filename='images/profile-default.png') }}" alt="Profile">
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="left-panel">
+      <h2>Welcome, Fella!</h2>
+      <p>
+        You can use this space to document your thoughts and experiences whenever you feel the need.
+        Writing things down can be a therapeutic way to reduce stress, giving you a private outlet for your emotions
+        or a way to keep track of your activities to help maintain productivity.
+      </p>
+      <blockquote>
+        <em>"Sometimes you don’t know what you think until you write it down."</em>
+      </blockquote>
+    </div>
+
+    <div class="right-panel">
+      <a href="{{ url_for('journal.page') }}" class="book-link">
+        <img src="{{ url_for('static', filename='images/journal-book.png') }}" alt="Journal Book" class="book-image">
+      </a>
+    </div>
+  </div>
+
 </body>
 </html>

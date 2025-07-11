@@ -29,7 +29,10 @@ def create_app():
     # Register routes
     from app.routes.auth import auth_bp
     from app.routes.dashboard import dash_bp
+    from app.routes.journal import journal_bp
+
     app.register_blueprint(auth_bp)
     app.register_blueprint(dash_bp)
+    app.register_blueprint(journal_bp)
 
     return app
