@@ -56,6 +56,7 @@ def login():
     # Successful login
     session["user_id"] = str(user["_id"])
     session["user_name"] = user["full_name"]
+    session["user_email"] = user["email"]
     flash("Logged in successfully.", "success")
     return redirect(url_for("dashboard.dashboard"))
 
@@ -97,3 +98,10 @@ def register():
         return redirect(url_for("auth.index"))
 
     return render_template("register.html", page="register", form_errors={})
+
+
+@auth_bp.route("/logout")
+def logout():
+    session.clear()
+    flash("Logged out successfully.", "success")
+    return redirect(url_for("auth.index"))

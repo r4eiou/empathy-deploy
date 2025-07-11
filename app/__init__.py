@@ -21,7 +21,7 @@ def create_app():
     # Test the connection
     try:
         with app.app_context():
-            mongo.cx.server_info()  # This should succeed
+            mongo.cx.server_info() 
             print("✅ MongoDB connected successfully!")
     except Exception as e:
         print(f"❌ MongoDB connection failed: {e}")
@@ -30,9 +30,12 @@ def create_app():
     from app.routes.auth import auth_bp
     from app.routes.dashboard import dash_bp
     from app.routes.journal import journal_bp
+    from app.routes.profile import profile_bp
+
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(dash_bp)
     app.register_blueprint(journal_bp)
+    app.register_blueprint(profile_bp)
 
     return app
