@@ -1,3 +1,12 @@
+:root {
+  --white: #FFFFFF;
+  --brown: #964B00;
+  --black: #000000;
+  --gray : #777;
+  --red  : red;
+  --hover: #333;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -40,7 +49,7 @@ h2, p {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #fff;
+  background: var(--white);
 }
 
 .form-box {
@@ -49,14 +58,14 @@ h2, p {
 }
 
 .form-box h2 {
-  color: #a54d00;
+  color: var(--brown);
   font-size: 24px;
   margin-bottom: 10px;
 }
 
 .form-box p {
   font-size: 14px;
-  color: #777;
+  color: var(--gray);
   margin-bottom: 20px;
 }
 
@@ -71,7 +80,7 @@ form input {
   width: 100%;
   padding: 10px;
   border-radius: 6px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--white);
   margin-bottom: 10px;
   text-align: left;
 }
@@ -79,8 +88,8 @@ form input {
 form button {
   width: 100%;
   padding: 12px;
-  background-color: #000;
-  color: #fff;
+  background-color: var(--black);
+  color: var(--white);
   font-weight: bold;
   border: none;
   border-radius: 6px;
@@ -89,11 +98,11 @@ form button {
 }
 
 form button:hover {
-  background-color: #333;
+  background-color: var(--hover);
 }
 
 .error {
-  color: red !important;
+  color: var(--red) !important;
   font-size: 12px;
   margin: 4px 0 0 0;
   text-align: left !important;
@@ -107,7 +116,7 @@ form button:hover {
 }
 
 .signup-link a {
-  color: #a54d00;
+  color: var(--brown);
   text-decoration: none;
   font-weight: bold;
 }

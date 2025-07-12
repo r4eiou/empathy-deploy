@@ -1,10 +1,20 @@
+:root {
+  --white: #FFFFFF;
+  --brown: #964B00;
+  --black: #000000;
+  --gray : #777;
+  --red  : red;
+  --hover: #333;
+  --navbar-border: #ddd;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 16px 32px;
-  background-color: #f8f8f8;
-  border-bottom: 1px solid #ddd;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--navbar-border);
   height: 70px;
   box-sizing: border-box;
 }
