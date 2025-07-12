@@ -3,12 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <title>Profile | EMPATHY</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-
+  <!-- TODO: Recheck frontend with index.css once mongodb connection fixed -->
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="navbar-left">
@@ -51,7 +50,7 @@
 
 
   <!-- Profile Container -->
-  <div class="profile-container">
+  <div class="container profile">
     <div class="card left-card">
         <img src="{{ url_for('static', filename='images/profile-default.png') }}" alt="User Image" class="profile-img">
             <h2 class="username">{{ username }}</h2>

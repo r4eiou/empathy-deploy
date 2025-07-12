@@ -12,6 +12,20 @@ def index():
 @auth_bp.route("/login", methods=["POST"])
 def login():
     """Login form submission"""
+
+    # TEMPORARY BYPASS - REMOVE WHEN MONGODB IS FIXED
+    BYPASS_AUTH = True  # Set to False when you want normal auth
+    
+    if BYPASS_AUTH:
+        email = request.form.get("email", "").strip()
+        if email:
+            session["user_id"] = "507f1f77bcf86cd799439011"  # Dummy user ID
+            session["user_name"] = "Test User"
+            session["user_email"] = email
+            flash("Logged in successfully (bypass mode).", "success")
+            return redirect(url_for("dashboard.dashboard"))
+        
+
     form_errors = {}
     email = request.form.get("email", "").strip()
     password = request.form.get("password", "").strip()

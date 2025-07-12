@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <title>Dashboard | EMPATHY</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -39,8 +40,8 @@
   </nav>
 
   <!-- Main Container -->
-  <div class="container">
-    <div class="left-panel">
+  <div class="container dashboard">
+    <div class="left-panel dashboard">
       <h2>Welcome, Fella!</h2>
       <p>
         You can use this space to document your thoughts and experiences whenever you feel the need.
@@ -52,7 +53,7 @@
       </blockquote>
     </div>
 
-    <div class="right-panel">
+    <div class="right-panel dashboard">
       <a href="{{ url_for('journal.page') }}" class="book-link">
         <img src="{{ url_for('static', filename='images/journal-book.png') }}" alt="Journal Book" class="book-image">
       </a>

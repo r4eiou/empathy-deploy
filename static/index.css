@@ -1,0 +1,414 @@
+/* ==========================================================================
+   CSS VARIABLES
+   ========================================================================== */
+
+:root {
+  --white: #FFFFFF;
+  --light-bg: #FDFBFF;
+  --brown: #964B00;
+  --black: #000000;
+  --gray: #777;
+  --red: red;
+  --hover: #333;
+  --navbar-border: #ddd;
+}
+
+/* ==========================================================================
+   GLOBAL STYLES
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--white);
+}
+
+h2, p {
+  text-align: center;
+}
+
+/* ==========================================================================
+   NAVBAR STYLES
+   ========================================================================== */
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--navbar-border);
+  height: 70px;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--black);
+  margin: 0;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-15px);
+}
+
+.icon-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.icon-group a {
+  display: inline-block;
+}
+
+.icon-group a:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-group img {
+  width: 25px;
+  height: 25px;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.icon-group img:hover {
+  opacity: 0.7;
+}
+
+.icon-group img.profile-filled {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  padding: 0;
+}
+
+.icon-group img.profile-filled:hover {
+  transform: scale(1.05);
+}
+
+.icon-group a img[alt="Logout"] {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.icon-group a img[alt="Logout"]:hover {
+  opacity: 0.7;
+}
+
+/* ==========================================================================
+   CONTAINER LAYOUTS
+   ========================================================================== */
+
+.container {
+  display: flex;
+  height: 100vh;
+}
+
+/* Profile specific container */
+.container.profile {
+  justify-content: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+/* Dashboard specific container */
+.container.dashboard {
+  height: calc(100% - 70px);
+  padding: 2rem 4rem;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   PANEL STYLES
+   ========================================================================== */
+
+.left-panel {
+  width: 50%;
+}
+
+.left-panel img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+/* Dashboard left panel */
+.left-panel.dashboard {
+  width: 50%;
+}
+
+.left-panel.dashboard h2 {
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--brown);
+  text-align: left;
+}
+
+.left-panel.dashboard p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--black);
+  margin-top: 1rem;
+  max-width: 80%;
+  text-align: left;
+}
+
+.left-panel.dashboard blockquote {
+  margin-top: 2rem;
+  max-width: 80%;
+  font-size: 0.85rem;
+  color: var(--gray);
+  text-align: right;
+}
+
+.right-panel {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--white);
+}
+
+/* Dashboard right panel */
+.right-panel.dashboard {
+  position: relative;
+  width: 60%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   FORM STYLES
+   ========================================================================== */
+
+.form-box {
+  width: 80%;
+  max-width: 400px;
+}
+
+.form-box h2 {
+  color: var(--brown);
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.form-box p {
+  font-size: 14px;
+  color: var(--gray);
+  margin-bottom: 20px;
+}
+
+form label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+  margin-top: 15px;
+}
+
+form input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid var(--white);
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+form button {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--black);
+  color: var(--white);
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+form button:hover {
+  background-color: var(--hover);
+}
+
+.signup-link {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 15px;
+}
+
+.signup-link a {
+  color: var(--brown);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.error {
+  color: var(--red) !important;
+  font-size: 12px;
+  margin: 4px 0 0 0;
+  text-align: left !important;
+  display: block;
+}
+
+/* ==========================================================================
+   DASHBOARD SPECIFIC STYLES
+   ========================================================================== */
+
+.profile-icon {
+  position: absolute;
+  top: 10px;
+  right: 40px;
+}
+
+.profile-icon img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.profile-icon img:hover {
+  transform: scale(1.05);
+}
+
+.book-image {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.book-image:hover {
+  transform: scale(1.02);
+}
+
+.start-button {
+  position: absolute;
+  top: 30%;
+  right: -1rem;
+  background-color: var(--brown);
+  color: var(--white);
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  text-decoration: none;
+  box-shadow: 0 2px 6px var(--black);
+  transition: background-color 0.2s ease;
+}
+
+.start-button:hover {
+  background-color: var(--brown);
+}
+
+/* ==========================================================================
+   PROFILE PAGE STYLES
+   ========================================================================== */
+
+.back-button {
+  margin: 1rem 2rem;
+  font-size: 0.9rem;
+  color: var(--gray);
+}
+
+.card {
+  background-color: var(--white);
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  width: 400px;
+  text-align: center;
+}
+
+.profile-img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 1.5rem;
+}
+
+.username {
+  font-size: 1.4rem;
+  color: var(--brown);
+  font-weight: 600;
+  margin: 0.5rem 0;
+}
+
+.email {
+  font-size: 0.95rem;
+  color: var(--gray);
+  margin-bottom: 1rem;
+}
+
+.quote {
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--gray);
+  text-align: center;
+}
+
+.right-card {
+  width: 600px;
+  padding: 1.5rem;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.meme-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: var(--brown);
+}
+
+.meme-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.meme-item {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.meme-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
