@@ -1,2 +1,17 @@
-# Ignore Python virtual environment directory
-.venv/
+# Ignore Flask session data
+flask_session/
+
+# Bytecode and cache
+__pycache__/
+*.py[cod]
+
+# VSCode settings (optional, useful)
+.vscode/
+*.code-workspace
+
+# Environment variables
+# .env
+
+# Python virtual environments
+venv/
+env/

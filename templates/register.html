@@ -2,33 +2,36 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login | EMPATHY</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+  <title>Register | EMPATHY</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='register.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
     <div class="left-panel">
-      <img src="{{ url_for('static', filename='images/login-image.jpg') }}" alt="Let Good Things Grow" />
+      <img src="{{ url_for('static', filename='images/register-image.jpg') }}" alt="grow through what you go through" />
     </div>
     <div class="right-panel">
       <div class="form-box">
-        <h2>Welcome Back!!</h2>
-        <p>Please Login your Account</p>
-        <form method="POST" action="{{ url_for('auth.login') }}">
+        <h2>Create an Account</h2>
+        <p>Are you ready to join us? Let’s create Account</p>
+        <form method="POST" action="{{ url_for('auth.register') }}">
+          <label for="fullname">Full name</label>
+          <input type="text" id="fullname" name="fullname" placeholder="John Doe" value="{{ request.form.fullname }}">
+          {% if form_errors.fullname %}
+            <p class="error">{{ form_errors.fullname }}</p>
+          {% endif %}
           <label for="email">Email</label>
-          <input type="email" id="email" name="email" placeholder="admin@gmail.com" value="{{ request.form.email if request.form else '' }}">
-          {% if form_errors and form_errors.email %}
+          <input type="email" id="email" name="email" placeholder="admin@gmail.com" value="{{ request.form.email  }}">
+          {% if form_errors.email %}
             <p class="error">{{ form_errors.email }}</p>
           {% endif %}
-
           <label for="password">Password</label>
           <input type="password" id="password" name="password" placeholder="********">
-          {% if form_errors and form_errors.password %}
+          {% if form_errors.password %}
             <p class="error">{{ form_errors.password }}</p>
           {% endif %}
-
-          <button type="submit">Login</button>
+          <button type="submit">Create Account</button>
 
           <div class="signup-link">
             {% if page == 'login' %}

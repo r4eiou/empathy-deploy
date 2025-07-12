@@ -1,0 +1,85 @@
+:root {
+  --white: #FFFFFF;
+  --brown: #964B00;
+  --black: #000000;
+  --gray : #777;
+  --red  : red;
+  --hover: #333;
+  --navbar-border: #ddd;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 32px;
+  background-color: var(--white);
+  border-bottom: 1px solid var(--navbar-border);
+  height: 70px;
+  box-sizing: border-box;
+}
+
+.logo {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: black;
+  margin: 0;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-15px);
+}
+
+.icon-group {
+  display: flex;
+  align-items: center;      
+  justify-content: center;
+  gap: 25px;
+}
+.icon-group a {
+  display: inline-block;
+}
+.icon-group a:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-group img {
+  width: 25px;
+  height: 25px;
+  transition: opacity 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+.icon-group img:hover {
+  opacity: 0.7;
+}
+
+.icon-group img.profile-filled {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  padding: 0; 
+}
+
+.icon-group img.profile-filled:hover {
+  transform: scale(1.05);
+}
+
+.icon-group a img[alt="Logout"] {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.icon-group a img[alt="Logout"]:hover {
+  opacity: 0.7;
+}
