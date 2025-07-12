@@ -23,7 +23,7 @@ def login():
             session["user_name"] = "Test User"
             session["user_email"] = email
             flash("Logged in successfully (bypass mode).", "success")
-            return redirect(url_for("dashboard.dashboard"))
+            return redirect(url_for("journal.page"))
         
 
     form_errors = {}
@@ -72,7 +72,7 @@ def login():
     session["user_name"] = user["full_name"]
     session["user_email"] = user["email"]
     flash("Logged in successfully.", "success")
-    return redirect(url_for("dashboard.dashboard"))
+    return redirect(url_for("journal.page"))
 
 
 @auth_bp.route("/register", methods=["GET", "POST"])

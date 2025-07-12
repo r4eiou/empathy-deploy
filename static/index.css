@@ -134,8 +134,8 @@ h2, p {
   gap: 1rem;
 }
 
-/* Dashboard specific container */
-.container.dashboard {
+/* Journal specific container */
+.container.journal {
   height: calc(100% - 70px);
   padding: 2rem 4rem;
   justify-content: space-between;
@@ -161,19 +161,19 @@ h2, p {
   border-bottom-right-radius: 20px;
 }
 
-/* Dashboard left panel */
-.left-panel.dashboard {
+/* Journal left panel */
+.left-panel.journal {
   width: 50%;
 }
 
-.left-panel.dashboard h2 {
+.left-panel.journal h2 {
   font-weight: 600;
   font-size: 1.6rem;
   color: var(--brown);
   text-align: left;
 }
 
-.left-panel.dashboard p {
+.left-panel.journal p {
   font-size: 0.95rem;
   line-height: 1.6;
   color: var(--black);
@@ -182,7 +182,7 @@ h2, p {
   text-align: left;
 }
 
-.left-panel.dashboard blockquote {
+.left-panel.journal blockquote {
   margin-top: 2rem;
   max-width: 80%;
   font-size: 0.85rem;
@@ -198,8 +198,8 @@ h2, p {
   background: var(--white);
 }
 
-/* Dashboard right panel */
-.right-panel.dashboard {
+/* Journal right panel */
+.right-panel.journal {
   position: relative;
   width: 60%;
   height: 100%;
@@ -279,10 +279,6 @@ form button:hover {
   display: block;
 }
 
-/* ==========================================================================
-   DASHBOARD SPECIFIC STYLES
-   ========================================================================== */
-
 .profile-icon {
   position: absolute;
   top: 10px;
@@ -300,6 +296,12 @@ form button:hover {
 .profile-icon img:hover {
   transform: scale(1.05);
 }
+
+
+/* ==========================================================================
+   JOURNAL SPECIFIC STYLES
+   ========================================================================== */
+
 
 .book-image {
   width: 90%;
