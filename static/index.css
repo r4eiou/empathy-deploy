@@ -8,9 +8,12 @@
   --brown: #964B00;
   --black: #000000;
   --gray: #777;
+  --light-gray: #F8FAFC;
   --red: red;
   --hover: #333;
   --navbar-border: #ddd;
+
+  --border-radius: 16px;
 }
 
 /* ==========================================================================
@@ -32,8 +35,22 @@ html, body {
   background-color: var(--white);
 }
 
+.light-bg {
+  background-color: var(--light-bg);
+}
+
 h2, p {
   text-align: center;
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.rounded {
+  border-radius: var(--border-radius);
 }
 
 /* ==========================================================================
@@ -144,6 +161,17 @@ h2, p {
   overflow: hidden;
 }
 
+/* Dashboard specific container */
+.container.dashboard {
+  height: calc(100% - 70px);
+  padding: 2rem 4rem;
+  justify-content: space-between;
+  align-items: start;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+
 /* ==========================================================================
    PANEL STYLES
    ========================================================================== */
@@ -152,7 +180,7 @@ h2, p {
   width: 50%;
 }
 
-.left-panel img {
+.left-panel.login img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -190,6 +218,13 @@ h2, p {
   text-align: right;
 }
 
+
+/* Dashboard left panel */
+.left-panel.dashboard {
+  width: 40%;
+  margin: 0 auto 1rem auto;  
+}
+
 .right-panel {
   width: 50%;
   display: flex;
@@ -204,6 +239,15 @@ h2, p {
   width: 60%;
   height: 100%;
   overflow: hidden;
+}
+
+/* Journal right panel */
+.right-panel.dashboard {
+  position: relative;
+  width: 60%;
+  height: 100%;
+  overflow: hidden;
+  background: none;
 }
 
 /* ==========================================================================
@@ -333,6 +377,236 @@ form button:hover {
 .start-button:hover {
   background-color: var(--brown);
 }
+
+
+/* ==========================================================================
+   DASHBOARD SPECIFIC STYLES
+   ========================================================================== */
+.search-bar {
+  margin: 0 auto 1rem auto;  
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  position-anchor: top left;
+  width: 80%;
+  height: 2.5rem;
+}
+
+.search-bar input {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: var(--white);
+
+  font-size: 0.8rem;
+}
+
+.search-bar button {
+  width: 3rem;
+  height: 2.5rem;
+  box-sizing: border-box;
+  background-color: var(--white);
+  border: 0px solid var(--gray);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+  border-radius: 50%;
+  cursor: pointer;
+
+  transition: 1s background-color, color;
+}
+
+.search-bar button:hover {
+  background-color: var(--brown);
+  color: var(--white);
+  transition: background-color 0.3s ease;
+}
+
+.entries-panel {
+  width: 95%;
+  height: calc(100vh - 25vh);
+  min-height: 0;
+  overflow: hidden auto; 
+  padding: 1rem;
+  margin-top: 2rem;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+
+  scroll-behavior: smooth;
+}
+
+.entry-item {
+  min-height: 15vh;
+  max-height: 17vh;
+  width: 100%;
+  background-color: var(--white);
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-bottom: 2rem;
+  border-radius: var(--border-radius);
+  position: relative;
+  cursor: pointer;
+
+  transition: 0.2s transform;
+}
+
+.entry-item:hover {
+  transform: scale(1.02);
+}
+
+.entry-item::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 0px;
+  bottom: 0px;
+  width: 0; 
+  background-color: var(--brown);
+  opacity: 0.5;
+  transition: width 0.3s ease;
+}
+
+.entry-item.selected::after {
+  width: 0.5rem;
+}
+
+
+.entry-item p {
+  color: var(--black);
+  text-align: start;
+}
+
+.entry-item p.title {
+  font-size: 1.2rem;
+  margin-bottom: 0.3rem;
+}
+
+.entry-item p.date {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 100;
+  margin-bottom: 0.7rem;
+}
+
+.entry-item p.content {
+  font-size: 0.8rem;
+  font-weight: 300;
+  letter-spacing: 0.4px;
+}
+
+.entry-section {
+  width: 100%;
+  height: calc(100vh - 25vh);
+  min-height: 0;
+  overflow: hidden auto; 
+  
+  padding: 1rem;
+  border: 0.2px solid var(--gray);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background:var(--white);
+
+  font-size: 1vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: start;
+  align-items: flex-start;
+
+  scroll-behavior: smooth;
+}
+
+.entry-section button.create-entry {
+  width: 35%;
+  height: 5vh;
+  background-color: var(--brown);
+  color: var(--white);
+  justify-content: space-evenly;
+
+  font-size: 1.4vw;
+  font-weight: 600;
+  border: 0.2px solid var(--brown);
+  cursor: pointer;
+
+  transition: 1.5s transform;
+}
+
+.entry-section button.create-entry:hover {
+  transform: scale(1.1);
+}
+
+.entry-section .chat-bubble {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+  height: fit-content;
+  max-height: 30vh;
+  overflow: hidden;
+  padding: 1rem;
+}
+
+.entry-section .chat-bubble .profile {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.entry-section .chat-bubble .col-header {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.entry-section span.time {
+  font-size: 0.7rem;
+  color: var(--gray);
+  font-weight: 100;
+}
+
+.entry-section span.title {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.col-content {
+  height: 24vh;
+  width: 100%;
+  background-color: var(--light-gray);
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  
+  padding-bottom: 2rem;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.col-content p {
+  text-align: justify;
+  
+  font-weight: 200;
+  font-size: 0.9rem;
+  letter-spacing: 0.4px;
+  line-height: 1.2rem;
+}
+
+.chat-bubble .col .meme-response {
+  width: auto;
+  height: 25vh;
+  object-fit: cover;
+  display: block;
+}
+
 
 /* ==========================================================================
    PROFILE PAGE STYLES

@@ -3,10 +3,150 @@
 <head>
   <meta charset="UTF-8">
   <title>Your Dashboard</title>
-  <!-- /<link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}"> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+
 </head>
-<body>
-  <h1>Welcome to your Dashboard!</h1>
-  <p>This is where your writing begins...</p>
+<body class="light-bg">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <h1 class="logo">EMPATHY</h1>
+    </div>
+    
+    <div class="navbar-right">
+        <div class="icon-group">
+            
+            <img src="{{ url_for('static', filename='images/new-entry-default.png') }}" alt="New Entry">
+            
+            <img src="{{ url_for('static', filename='images/journal-default.png') }}" alt="Journal">
+            </a>
+            <a href="{{ url_for('dashboard.dashboard') }}">
+              <img src="{{ url_for('static', filename='images/dashboard-default.png') }}" alt="Dashboard">
+            </a>
+            
+            <img src="{{ url_for('static', filename='images/all-entry-default.png') }}" alt="All Entries">
+            
+            <a href="{{ url_for('profile.page') }}">
+              <img src="{{ url_for('static', filename='images/profile-default.png') }}" alt="Profile" class="profile-filled">
+            </a>
+            <a href="{{ url_for('auth.logout') }}" class="logout-link">
+              <img src="{{ url_for('static', filename='images/logout-default.png') }}" alt="Logout" title="Logout">
+            </a>
+        </div>
+    </div>
+  </nav>
+
+
+  <!-- Main Container -->
+  <div class="container dashboard">
+    <div class="left-panel dashboard">
+      <div class="search-bar rounded">
+          <input type="text" class="rounded" placeholder="Search your entries..." aria-label="Search">
+          <button onclick=""><i class="bi bi-search"></i></button>
+      </div>
+
+      <div class="entries-panel">
+        <div class="entry-item rounded" onclick="selectItem(this)">
+          <p class="title">TitleText</p>
+          <p class="date">
+            July 10th, 2025
+          </p>
+          <p class="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
+          </p>
+        </div>
+        <div class="entry-item rounded" onclick="selectItem(this)">
+          <p class="title">TitleText</p>
+          <p class="date">
+            July 10th, 2025
+          </p>
+          <p class="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
+          </p>
+        </div>
+        <div class="entry-item rounded" onclick="selectItem(this)">
+          <p class="title">TitleText</p>
+          <p class="date">
+            July 10th, 2025
+          </p>
+          <p class="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="right-panel dashboard">
+      <div class="entry-section rounded">
+        <!-- if no entries yet,
+        No Entries yet.
+        <button class="create-entry rounded" onclick=""><i class="bi bi-plus-circle-dotted"></i>  Create an Entry?</button>
+        -->
+        <div class="chat-bubble">
+          <img src="/static/images/profile-default.png" class="profile" alt="profile-icon">
+          <div class="col">
+            <div class="col-header">
+            <span class="title">You</span><span class="time">02:22 AM</span>
+            </div>
+            <div class="col-content rounded">
+              <p>
+              Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores 
+              est molestias earum. Qui quasi Quis sit voluptas accusamus id iure sequi. 
+              Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate 
+              ea sint.Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias 
+              earum. Qui quasi Quis sit voluptas accusamus id iure sequi. Nam maiores explicabo cum sunt 
+              sintsed officiis voluptatum ut galisum cupiditate ea sint.Lorem ipsum dolor sit amet. Aut 
+              pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas accusamus 
+              id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate 
+              ea sint.Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. 
+              Qui quasi Quis sit voluptas accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed 
+              officiis voluptatum ut galisum cupiditate ea sint.Lorem ipsum dolor sit amet. Aut pariatur dolores 
+              eum quod dolores est molestias earum. Qui quasi Quis sit voluptas accusamus id iure sequi. 
+              Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint...
+              </p>
+              
+            </div>
+            </div>
+          </div>
+          
+          <div class="chat-bubble">
+          <img src="/static/images/ai-chat.svg" class="profile" alt="ai-icon">
+          <div class="col">
+            <div class="col-header">
+            <span class="time">02:22 AM</span>
+            </div>
+            <img src="/static/images/meme-sample.png" class="meme-response rounded" alt="meme-response">
+            </div>
+          </div>
+          
+        </div>
+        </div>
+        
+        
+      </div>
+      
+      <!--
+      <a href="{{ url_for('dashboard.dashboard') }}" class="book-link">
+        <img src="{{ url_for('static', filename='images/journal-book.png') }}" alt="Journal Book" class="book-image">
+      </a>
+      -->
+      
+    </div>
+  </div>
+  
+  
 </body>
 </html>
+
+<script>
+  function selectItem(element) {
+  document.querySelectorAll('.entry-item').forEach(item => {
+    item.classList.remove('selected');
+  });
+  
+  element.classList.add('selected');
+}
+</script>
