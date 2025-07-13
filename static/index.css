@@ -7,6 +7,7 @@
   --light-bg: #FDFBFF;
   --brown: #964B00;
   --black: #000000;
+  --yellow: #FFC700;
   --gray: #777;
   --light-gray: #F8FAFC;
   --red: red;
@@ -51,6 +52,14 @@ h2, p {
 
 .rounded {
   border-radius: var(--border-radius);
+}
+
+.box-shadow {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.box-shadow-heavy {
+  box-shadow: 0 5px 4px rgba(0, 0, 0, 0.4);
 }
 
 .modal {
@@ -271,6 +280,32 @@ h2, p {
   overflow: hidden;
 }
 
+/* Dashboard specific container */
+.container.allEntries {
+  height: calc(100% - 70px);
+  padding: 4rem 4rem;
+  justify-content: center;
+  align-items: start;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.container.allEntries .wrapper {
+  width: 100%;
+  height: 100%;
+
+  max-width: 70vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+  padding: 1rem;
+  gap: 1rem;
+
+  background: linear-gradient(45deg, #FDE38F, #FDAB5F);
+}
+
 
 /* ==========================================================================
    PANEL STYLES
@@ -325,6 +360,12 @@ h2, p {
   margin: 0 auto 1rem auto;  
 }
 
+/* allEntries left panel */
+.left-panel.allEntries {
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+  background: linear-gradient(rgba(246, 246, 246, 0.8), rgba(255, 255, 255, 0.8));
+}
+
 .right-panel {
   width: 50%;
   display: flex;
@@ -348,6 +389,17 @@ h2, p {
   height: 100%;
   overflow: hidden;
   background: none;
+}
+
+/* allEntries panels */
+.right-panel.allEntries, 
+.left-panel.allEntries {
+  height: 100%;
+}
+
+.right-panel.allEntries {
+  border-radius: 0 var(--border-radius) var(--border-radius) 0;
+  background: linear-gradient(rgba(246, 246, 246, 1), rgba(255, 255, 255, 1));
 }
 
 /* ==========================================================================
@@ -788,3 +840,84 @@ form button:hover {
   object-fit: cover;
   display: block;
 }
+
+
+/* ==========================================================================
+   ALLENTRIES PAGE STYLES
+   ========================================================================== */
+
+   .entries-table {
+    width: 95%;
+    margin: 0 auto;
+
+    padding: 0.5rem;
+    display: block;
+   }
+
+
+   .entries-table .icon {
+    width: 10%;
+   }
+
+   .entries-table .title {
+    width: 55%;
+   }
+
+   .entries-table .date {
+    width: 35%;
+   }
+
+   .entries-table thead, .entries-table tbody {
+    display: block;
+   }
+
+   .entries-table th {
+    padding-bottom: 1rem;
+    font-size: 1.1rem;
+    text-align: start;
+   }
+
+   .entries-table .bi {
+    display: inline-block;
+    transition: 0.2s transform;
+   }
+
+   .entries-table .bi:hover {
+    transform: scale(1.2);
+   }
+
+   .entries-table .bi-star {
+    color: var(--brown);
+    cursor: pointer;
+    
+   }
+
+   .entries-table .bi-star-fill {
+    color: var(--yellow);
+    cursor: pointer;
+   }
+
+   .entries-table td {
+    font-weight: 200;
+    letter-spacing: 0.4px;
+    padding: 0.4rem;
+   }
+
+   .entries-table tbody {
+    max-height: 40vh;
+    overflow-y: auto; 
+   }
+
+   .entries-table tr {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+  }
+
+   .entries-table tbody tr {
+    cursor: pointer;
+   }
+
+   .entries-table tbody tr:hover { 
+    background-color: rgba(250, 129, 0, 0.15);
+   }
