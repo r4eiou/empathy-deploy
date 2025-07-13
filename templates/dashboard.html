@@ -19,7 +19,7 @@
     <div class="navbar-right">
         <div class="icon-group">
             
-            <img src="{{ url_for('static', filename='images/new-entry-default.png') }}" alt="New Entry">
+            <img src="{{ url_for('static', filename='images/new-entry-default.png') }}" onclick="showNewEntryModal()" alt="New Entry">
             
             <img src="{{ url_for('static', filename='images/journal-default.png') }}" alt="Journal">
             </a>
@@ -135,12 +135,25 @@
       -->
       
     </div>
+      <div class="modal" id="newEntryModal">
+        <div class="modal-content">
+          <div class="modal-title">Create a New Journal Entry</div>
+          <form action="{{ url_for('dashboard.dashboard') }}" method="POST">
+            <input type="text" name="title" placeholder="Title" required>
+            <textarea name="content" class="rounded" placeholder="Share your thoughts..." required></textarea>
+            <div class="button-container">
+              <button class="btn-secondary" id="modal-cancel">Cancel</button>
+              <button class="btn-primary" type="submit" id="modal-save">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>>
+
+      </div>
+
   </div>
   
   
-</body>
-</html>
-
 <script>
   function selectItem(element) {
   document.querySelectorAll('.entry-item').forEach(item => {
@@ -149,4 +162,27 @@
   
   element.classList.add('selected');
 }
+ 
+ // MODAL
+ const modal = document.getElementById("newEntryModal");
+ const btnCancel = document.getElementById("modal-cancel");
+
+ btnCancel.addEventListener("click", ()=> {
+  event.preventDefault();
+  event.stopPropagation();
+  modal.classList.remove("visible");
+ })
+
+ modal.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.classList.remove("visible");
+  }
+ });
+
+ function showNewEntryModal() {
+  modal.classList.add("visible");
+ }
+
 </script>
+</body>
+</html>

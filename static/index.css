@@ -53,6 +53,106 @@ h2, p {
   border-radius: var(--border-radius);
 }
 
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.modal.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-content {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  width: 80%;
+  max-width: 70vw;
+}
+
+.modal-content .modal-title {
+  text-align: center;
+  font-weight: 200;
+  margin-bottom: 2rem;
+  font-size: 1.2rem;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 0.2rem;
+  border-radius: 0%;
+  border-bottom: 1px solid var(--brown);
+  margin-bottom: 0.5rem;
+
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.modal-content textarea {
+  width: 100%;
+  height: 30vh;
+  padding: 1rem;
+  border: 0.5px solid var(--brown);
+
+  resize: none;
+
+  font-weight: 200;
+  font-size: 1rem;
+}
+
+.modal-content input::placeholder, 
+.modal-content textarea::placeholder {
+  color: var(--brown);
+  opacity: 0.8;
+}
+
+.modal-content .btn-primary {
+  background-color: var(--brown);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-content .btn-secondary {
+  background-color: var(--white);
+  color: var(--brown);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--brown);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.modal-content button{
+  transition: 0.2s transform;
+  width: 10vw;
+}
+.modal-content button:hover {
+  transform: scale(1.05);
+}
+
+.modal-content .button-container {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+
 /* ==========================================================================
    NAVBAR STYLES
    ========================================================================== */
