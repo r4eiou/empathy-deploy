@@ -12,6 +12,7 @@ def create_app():
     app.config["MONGO_URI"] = os.getenv("MONGO_URI")
     app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
     app.config["SESSION_TYPE"] = "filesystem"
+    
 
     # Initialize extensions with the app instance
     mongo.init_app(app)
@@ -31,11 +32,15 @@ def create_app():
     from app.routes.dashboard import dash_bp
     from app.routes.journal import journal_bp
     from app.routes.profile import profile_bp
+    from app.routes.allEntries import all_entries_bp
+    from app.routes.entry import entry_bp
 
 
     app.register_blueprint(auth_bp)
     app.register_blueprint(dash_bp)
     app.register_blueprint(journal_bp)
     app.register_blueprint(profile_bp)
+    app.register_blueprint(all_entries_bp)
+    app.register_blueprint(entry_bp)
 
     return app

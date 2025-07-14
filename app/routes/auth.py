@@ -12,6 +12,7 @@ def index():
 @auth_bp.route("/login", methods=["POST"])
 def login():
     """Login form submission"""
+
     form_errors = {}
     email = request.form.get("email", "").strip()
     password = request.form.get("password", "").strip()
@@ -58,7 +59,7 @@ def login():
     session["user_name"] = user["full_name"]
     session["user_email"] = user["email"]
     flash("Logged in successfully.", "success")
-    return redirect(url_for("dashboard.dashboard"))
+    return redirect(url_for("journal.page"))
 
 
 @auth_bp.route("/register", methods=["GET", "POST"])

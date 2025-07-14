@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>Login | EMPATHY</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <div class="left-panel">
+    <div class="left-panel login">
       <img src="{{ url_for('static', filename='images/login-image.jpg') }}" alt="Let Good Things Grow" />
     </div>
     <div class="right-panel">
       <div class="form-box">
-        <h2>Welcome Back!!</h2>
+        <h2>Welcome Back!</h2>
         <p>Please Login your Account</p>
         <form method="POST" action="{{ url_for('auth.login') }}">
           <label for="email">Email</label>

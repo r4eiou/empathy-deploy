@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>All Entries View</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+
+</head>
+<body class="light-bg">
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      <h1 class="logo">EMPATHY</h1>
+    </div>
+    
+    <div class="navbar-right">
+        <div class="icon-group">
+            <img src="{{ url_for('static', filename='images/new-entry-default.svg') }}" alt="New Entry">
+            <a href="{{ url_for('journal.page') }}">
+            <img src="{{ url_for('static', filename='images/journal-default.svg') }}" alt="Journal">
+            </a>
+            <a href="{{ url_for('dashboard.dashboard') }}">
+              <img src="{{ url_for('static', filename='images/dashboard-default.svg') }}" alt="Dashboard">
+            </a>
+            <a href="{{ url_for('allEntries.allEntries') }}">
+            <img src="{{ url_for('static', filename='images/all-entry-filled.svg') }}" alt="All Entries">
+            </a>
+            <a href="{{ url_for('profile.page') }}">
+              <img src="{{ url_for('static', filename='images/profile-default.png') }}" alt="Profile" class="profile-filled">
+            </a>
+            <a href="{{ url_for('auth.logout') }}" class="logout-link">
+              <img src="{{ url_for('static', filename='images/logout-default.png') }}" alt="Logout" title="Logout">
+            </a>
+        </div>
+    </div>
+  </nav>
+
+
+  <!-- Back Button -->
+  <div class="back-button">
+  <a href="javascript:history.back()">
+    <img src="{{ url_for('static', filename='images/back-button.svg') }}" class="back-img">
+  </a>
+</div>
+
+
+  <!-- Main Container -->
+  <div class="container allEntries">
+    <div class="wrapper rounded">
+        <div class="left-panel allEntries box-shadow-heavy">
+        </div>
+
+        <div class="right-panel allEntries box-shadow-heavy">
+            <table class="entries-table">
+                <thead>
+                    <tr>
+                        <th class="icon"></th>
+                        <th class="title">Entry</th>
+                        <th class="date">Date of Entry</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-url="{{ url_for('entry.entry') }}">
+                        <td class="icon"><i class="bi bi-star"></i></td>
+                        <td class="title">TitleText</td>
+                        <td class="date">26th July, 2022</td> 
+                    </tr>
+                    <tr data-url="{{ url_for('entry.entry') }}">
+                        <td class="icon"><i class="bi bi-star"></i></td>
+                        <td class="title">TitleText</td>
+                        <td class="date">26th July, 2022</td> 
+                    </tr>
+                    <tr data-url="{{ url_for('entry.entry') }}">
+                        <td class="icon"><i class="bi bi-star"></i></td>
+                        <td class="title">TitleText</td>
+                        <td class="date">26th July, 2022</td> 
+                    </tr>
+                    <tr data-url="{{ url_for('entry.entry') }}">
+                        <td class="icon"><i class="bi bi-star"></i></td>
+                        <td class="title">TitleText</td>
+                        <td class="date">26th July, 2022</td> 
+                    </tr>
+                    <tr data-url="{{ url_for('entry.entry') }}">
+                        <td class="icon"><i class="bi bi-star"></i></td>
+                        <td class="title">TitleText</td>
+                        <td class="date">26th July, 2022</td> 
+                    </tr>
+                    <tr data-url="{{ url_for('entry.entry') }}">
+                        <td class="icon"><i class="bi bi-star"></i></td>
+                        <td class="title">TitleText</td>
+                        <td class="date">26th July, 2022</td> 
+                    </tr>
+                    <tr data-url="{{ url_for('entry.entry') }}">
+                        <td class="icon"><i class="bi bi-star"></i></td>
+                        <td class="title">TitleText</td>
+                        <td class="date">26th July, 2022</td> 
+                    </tr>
+                    <tr data-url="{{ url_for('entry.entry') }}">
+                        <td class="icon"><i class="bi bi-star"></i></td>
+                        <td class="title">TitleText</td>
+                        <td class="date">26th July, 2022</td> 
+                    </tr>
+                    <tr data-url="{{ url_for('entry.entry') }}">
+                        <td class="icon"><i class="bi bi-star"></i></td>
+                        <td class="title">TitleText</td>
+                        <td class="date">26th July, 2022</td> 
+                    </tr>
+                    
+                    <!--{% for entry in entries %}
+                    <tr>
+                        <td>{{ entry.title }}</td>
+                        <td>{{ entry.date.strftime('%B %d, %Y') }}</td>
+                        <td>{{ entry.content[:100] }}...</td>
+                    </tr>
+                    {% endfor %} -->
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+  </div>
+    
+  
+<script>
+  function favoriteEntry(element) {
+    // TODO: save favorite status
+    if (element.classList.contains('bi-star')) {
+        // Currently unfavorited, make it favorited
+        element.classList.remove('bi-star');
+        element.classList.add('bi-star-fill');
+    } else if (element.classList.contains('bi-star-fill')) {
+        // Currently favorited, make it unfavorited
+        element.classList.remove('bi-star-fill');
+        element.classList.add('bi-star');
+    }
+}
+
+// NOTE: temporarily put url to dashboard
+document.querySelectorAll('.entries-table tbody tr').forEach(tr => {
+    tr.addEventListener('click', function(e) {
+        // Check if clicked element is a star icon
+        if (e.target.classList.contains('bi-star') || e.target.classList.contains('bi-star-fill')) {
+            favoriteEntry(e.target);
+        } else {
+            // Navigate to the URL
+            window.location.href = this.dataset.url;
+        }
+    });
+});
+</script>
+</body>
+</html>

@@ -3,39 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <title>Profile | EMPATHY</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
 </head>
-<body>
-
+<body class="light-bg">
   <!-- Navigation Bar -->
   <nav class="navbar">
     <div class="navbar-left">
       <h1 class="logo">EMPATHY</h1>
     </div>
-    <div class="navbar-right">
+    <div class="navbar-right"> 
         <div class="icon-group">
-            
-            <img src="{{ url_for('static', filename='images/new-entry-default.png') }}" alt="New Entry">
-            
-            
-            <img src="{{ url_for('static', filename='images/journal-default.png') }}" alt="Journal">
-            
+            <img src="{{ url_for('static', filename='images/new-entry-default.svg') }}" alt="New Entry">
+            <a href="{{ url_for('journal.page') }}">
+            <img src="{{ url_for('static', filename='images/journal-default.svg') }}" alt="Journal">
+            </a>
             <a href="{{ url_for('dashboard.dashboard') }}">
-            <img src="{{ url_for('static', filename='images/dashboard-default.png') }}" alt="Dashboard">
+              <img src="{{ url_for('static', filename='images/dashboard-default.svg') }}" alt="Dashboard">
             </a>
-            
-            <img src="{{ url_for('static', filename='images/all-entry-default.png') }}" alt="All Entries">
-            
+            <a href="{{ url_for('allEntries.allEntries') }}">
+            <img src="{{ url_for('static', filename='images/all-entry-default.svg') }}" alt="All Entries">
+            </a>
             <a href="{{ url_for('profile.page') }}">
-            <img src="{{ url_for('static', filename='images/profile-filled.png') }}" alt="Profile" class="profile-filled">
+              <img src="{{ url_for('static', filename='images/profile-filled.png') }}" alt="Profile" class="profile-filled">
             </a>
-
             <a href="{{ url_for('auth.logout') }}" class="logout-link">
-            <img src="{{ url_for('static', filename='images/logout-default.png') }}" alt="Logout" title="Logout">
+              <img src="{{ url_for('static', filename='images/logout-default.png') }}" alt="Logout" title="Logout">
             </a>
-
         </div>
     </div>
 
@@ -45,14 +39,14 @@
   <!-- Back Button -->
   <div class="back-button">
   <a href="javascript:history.back()">
-    <img src="{{ url_for('static', filename='images/back-button.png') }}" class="back-img">
+    <img src="{{ url_for('static', filename='images/back-button.svg') }}" class="back-img">
   </a>
 </div>
 
 
   <!-- Profile Container -->
-  <div class="profile-container">
-    <div class="card left-card">
+  <div class="container profile">
+    <div class="card left-card box-shadow-heavy">
         <img src="{{ url_for('static', filename='images/profile-default.png') }}" alt="User Image" class="profile-img">
             <h2 class="username">{{ username }}</h2>
             <p class="email">{{ useremail }}</p>
@@ -61,7 +55,7 @@
         </blockquote>
     </div>
 
-    <div class="card right-card">
+    <div class="card right-card box-shadow-heavy">
         <h3 class="meme-title">Generated Memes</h3>
         <div class="meme-grid">
             {% for meme in memes %}
