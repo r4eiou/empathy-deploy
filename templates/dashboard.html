@@ -76,38 +76,46 @@
 
     <div class="right-panel dashboard">
       <div class="entry-section rounded">
-        <!-- if no entries yet,
-        No Entries yet.
-        <button class="create-entry rounded" onclick=""><i class="bi bi-plus-circle-dotted"></i>  Create an Entry?</button>
-        -->
-        <!-- User's chat bubble -->
-        <div class="chat-bubble" id="user-chat">
-          <img src="{{ url_for('static', filename='images/profile-default.png') }}" class="profile" alt="profile-icon">
-          <div class="col">
-            <div class="col-header">
-              <span class="title" id="entry-title">Title goes here</span>
-              <span class="time" id="entry-date">Date/time goes here</span>
-            </div>
-            <div class="col-content rounded">
-              <p id="entry-content">Content goes here</p>
+        {% if entries|length == 0 %}
+          <p>No Entries yet.</p>
+          <button class="create-entry rounded" onclick="showNewEntryModal()">
+            <i class="bi bi-plus-circle-dotted"></i> Create an Entry?
+          </button>
+        {% else %}
+          {% set latest = entries[0] %}
+          
+          <!-- User's chat bubble -->
+          <div class="chat-bubble" id="user-chat">
+            <img src="{{ url_for('static', filename='images/profile-default.png') }}" class="profile" alt="profile-icon">
+            <div class="col">
+              <div class="col-header">
+                <span class="title" id="entry-title">{{ latest.title }}</span>
+                <span class="time" id="entry-date">{{ latest.date }}</span>
+              </div>
+              <div class="col-content rounded">
+                <p id="entry-content">{{ latest.content }}</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- AI's meme chat bubble -->
-        <div class="chat-bubble" id="ai-chat">
-          <img src="{{ url_for('static', filename='images/ai-chat.svg') }}" class="profile" alt="ai-icon">
-          <div class="col">
-            <div class="col-header">
-              <span class="time" id="meme-date">Date/time goes here</span>
+          <!-- AI's meme chat bubble -->
+          <div class="chat-bubble" id="ai-chat">
+            <img src="{{ url_for('static', filename='images/ai-chat.svg') }}" class="profile" alt="ai-icon">
+            <div class="col">
+              <div class="col-header">
+                <span class="time" id="meme-date">{{ latest.date }}</span>
+              </div>
+              {% if latest.meme %}
+                <img src="{{ url_for('static', filename=latest.meme) }}" class="meme-response rounded" alt="meme-response" id="meme-image" style="display:block;">
+              {% else %}
+                <img src="" class="meme-response rounded" alt="meme-response" id="meme-image" style="display:none;">
+              {% endif %}
             </div>
-            <img src="" class="meme-response rounded" alt="meme-response" id="meme-image" style="display:none;">
           </div>
-        </div>
-        </div>
-        
-        
+        {% endif %}
       </div>
+    </div>
+
       
       <!--
       <a href="{{ url_for('dashboard.dashboard') }}" class="book-link">
