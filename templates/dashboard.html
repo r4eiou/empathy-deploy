@@ -18,19 +18,16 @@
     
     <div class="navbar-right">
         <div class="icon-group">
-            
-            <img src="{{ url_for('static', filename='images/new-entry-default.png') }}" onclick="showNewEntryModal()" alt="New Entry">
-            
-            <img src="{{ url_for('static', filename='images/journal-default.png') }}" alt="Journal">
+            <img src="{{ url_for('static', filename='images/new-entry-default.svg') }}" onclick="showNewEntryModal()" id="new-entry-nav-icon" alt="New Entry">
+            <a href="{{ url_for('journal.page') }}">
+            <img src="{{ url_for('static', filename='images/journal-default.svg') }}" alt="Journal">
             </a>
             <a href="{{ url_for('dashboard.dashboard') }}">
-              <img src="{{ url_for('static', filename='images/dashboard-default.png') }}" alt="Dashboard">
+              <img src="{{ url_for('static', filename='images/dashboard-filled.svg') }}" id="dashboard-nav-icon" alt="Dashboard">
             </a>
-            
             <a href="{{ url_for('allEntries.allEntries') }}">
-            <img src="{{ url_for('static', filename='images/all-entry-default.png') }}" alt="All Entries">
+            <img src="{{ url_for('static', filename='images/all-entry-default.svg') }}" alt="All Entries">
             </a>
-
             <a href="{{ url_for('profile.page') }}">
               <img src="{{ url_for('static', filename='images/profile-default.png') }}" alt="Profile" class="profile-filled">
             </a>
@@ -40,6 +37,14 @@
         </div>
     </div>
   </nav>
+
+
+  <!-- Back Button -->
+  <div class="back-button">
+  <a href="javascript:history.back()">
+    <img src="{{ url_for('static', filename='images/back-button.svg') }}" class="back-img">
+  </a>
+</div>
 
 
   <!-- Main Container -->
@@ -178,11 +183,20 @@
  modal.addEventListener("click", (event) => {
   if (event.target === modal) {
     modal.classList.remove("visible");
+
+  dashNavIcon.src = "{{ url_for('static', filename='images/dashboard-filled.svg') }}";
+  newEntryNavIcon.src = "{{ url_for('static', filename='images/new-entry-default.svg') }}";
   }
  });
 
+ const newEntryNavIcon = document.getElementById("new-entry-nav-icon");
+ const dashNavIcon = document.getElementById("dashboard-nav-icon");
+
+
  function showNewEntryModal() {
   modal.classList.add("visible");
+  dashNavIcon.src = "{{ url_for('static', filename='images/dashboard-default.svg') }}";
+  newEntryNavIcon.src = "{{ url_for('static', filename='images/new-entry-filled.svg') }}";
  }
 
 </script>
