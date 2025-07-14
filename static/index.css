@@ -759,8 +759,8 @@ form button:hover {
   align-items: flex-start;
   width: 100%;
   height: fit-content;
-  max-height: 30vh;
-  overflow: hidden;
+  overflow: visible;
+  flex-shrink: 0;
   padding: 1rem;
 }
 
@@ -791,7 +791,7 @@ form button:hover {
 }
 
 .col-content {
-  height: 24vh;
+  height: fit-content;
   width: 100%;
   background-color: var(--light-gray);
   padding: 1rem;
@@ -800,7 +800,6 @@ form button:hover {
   flex-direction: column;
   
   padding-bottom: 2rem;
-  overflow: hidden;
   box-sizing: border-box;
 }
 
