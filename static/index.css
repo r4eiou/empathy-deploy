@@ -50,6 +50,12 @@ h2, p {
   gap: 0.5rem;
 }
 
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
 .rounded {
   border-radius: var(--border-radius);
 }
@@ -128,30 +134,30 @@ h2, p {
 }
 
 .modal-content .btn-primary {
+  width: 10vw;
   background-color: var(--brown);
   color: var(--white);
   padding: 0.5rem 1rem;
   border: none;
   border-radius: var(--border-radius);
-  cursor: pointer;
   font-weight: bold;
 }
 
 .modal-content .btn-secondary {
+  width: 10vw;
   background-color: var(--white);
   color: var(--brown);
   padding: 0.5rem 1rem;
   border: 1px solid var(--brown);
   border-radius: var(--border-radius);
-  cursor: pointer;
   font-weight: bold;
 }
 
-.modal-content button{
+.modal-content button, .modal-content .bi{
+  cursor: pointer;
   transition: 0.2s transform;
-  width: 10vw;
 }
-.modal-content button:hover {
+.modal-content button:hover, .modal-content .bi:hover {
   transform: scale(1.05);
 }
 
@@ -161,6 +167,31 @@ h2, p {
   gap: 1rem;
 }
 
+.bi {
+    display: inline-block;
+    transition: 0.2s transform;
+    cursor: pointer;
+}
+
+.bi:hover {
+    transform: scale(1.2);
+}
+
+.bi-star {
+    color: var(--brown);
+}
+
+.bi-star-fill {
+    color: var(--yellow);
+}
+
+.bi-trash3 {
+    color: var(--black);
+}
+
+.bi-trash3-fill {
+  color: var(--black);
+}
 
 /* ==========================================================================
    NAVBAR STYLES
@@ -304,6 +335,15 @@ h2, p {
   gap: 1rem;
 
   background: linear-gradient(45deg, #FDE38F, #FDAB5F);
+}
+
+.container.entry {
+  height: calc(100% - 70px);
+  padding: 4rem 4rem;
+  justify-content: center;
+  align-items: start;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 
@@ -921,3 +961,60 @@ form button:hover {
    .entries-table tbody tr:hover { 
     background-color: rgba(250, 129, 0, 0.15);
    }
+
+
+/* ==========================================================================
+   ENTRY PAGE STYLES
+   ========================================================================== */
+
+#viewEntryModal {
+  background-color: transparent;
+}
+
+#viewEntryModal .modal-content {
+  max-width: 50vw;
+  min-height: 40vh;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+#viewEntryModal #title {
+    line-height: 1.2rem;
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+#viewEntryModal #date {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 0.6rem;
+  font-weight: 100;
+  margin-bottom: 0.7rem;
+}
+
+#viewEntryModal p {
+  margin-top: 0.5rem;
+  padding: 1rem;
+    line-height: 1.2rem;
+    font-weight: 200;
+    text-align: justify;
+}
+
+#viewEntryModal button {
+  background-color: none;
+  border: none;
+  width: fit-content;
+}
+
+#deleteEntryModal .modal-content{
+  width: 40vw;
+  height: fit-content;
+  max-height: 30vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+#deleteEntryModal .modal-content p{
+  padding: 0.5rem;
+}

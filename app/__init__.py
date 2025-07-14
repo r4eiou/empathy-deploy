@@ -33,6 +33,7 @@ def create_app():
     from app.routes.journal import journal_bp
     from app.routes.profile import profile_bp
     from app.routes.allEntries import all_entries_bp
+    from app.routes.entry import entry_bp
 
 
     app.register_blueprint(auth_bp)
@@ -40,5 +41,6 @@ def create_app():
     app.register_blueprint(journal_bp)
     app.register_blueprint(profile_bp)
     app.register_blueprint(all_entries_bp)
+    app.register_blueprint(entry_bp)
 
     return app
