@@ -58,33 +58,19 @@
       </div>
 
       <div class="entries-panel">
-        <div class="entry-item rounded" onclick="selectItem(this)">
-          <p class="title">TitleText</p>
-          <p class="date">
-            July 10th, 2025
-          </p>
-          <p class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
-          </p>
+        {% for entry in entries %}
+        <div class="entry-item rounded" onclick="selectItem(this)"
+            data-title="{{ entry.title|e }}"
+            data-content="{{ entry.content|e }}"
+            data-date="{{ entry.date }}"
+            data-meme="{{ url_for('static', filename=entry.meme) }}">
+          <p class="title">{{ entry.title }}</p>
+          <p class="date">{{ entry.date }}</p>
+          <p class="content">{{ entry.content[:150] }}{% if entry.content|length > 150 %}...{% endif %}</p>
         </div>
-        <div class="entry-item rounded" onclick="selectItem(this)">
-          <p class="title">TitleText</p>
-          <p class="date">
-            July 10th, 2025
-          </p>
-          <p class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
-          </p>
-        </div>
-        <div class="entry-item rounded" onclick="selectItem(this)">
-          <p class="title">TitleText</p>
-          <p class="date">
-            July 10th, 2025
-          </p>
-          <p class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliqu
-          </p>
-        </div>
+        {% else %}
+        <p>No entries yet.</p>
+        {% endfor %}
       </div>
     </div>
 
@@ -94,43 +80,29 @@
         No Entries yet.
         <button class="create-entry rounded" onclick=""><i class="bi bi-plus-circle-dotted"></i>  Create an Entry?</button>
         -->
-        <div class="chat-bubble">
-          <img src="/static/images/profile-default.png" class="profile" alt="profile-icon">
+        <!-- User's chat bubble -->
+        <div class="chat-bubble" id="user-chat">
+          <img src="{{ url_for('static', filename='images/profile-default.png') }}" class="profile" alt="profile-icon">
           <div class="col">
             <div class="col-header">
-            <span class="title">You</span><span class="time">02:22 AM</span>
+              <span class="title" id="entry-title">Title goes here</span>
+              <span class="time" id="entry-date">Date/time goes here</span>
             </div>
             <div class="col-content rounded">
-              <p>
-              Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores 
-              est molestias earum. Qui quasi Quis sit voluptas accusamus id iure sequi. 
-              Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate 
-              ea sint.Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias 
-              earum. Qui quasi Quis sit voluptas accusamus id iure sequi. Nam maiores explicabo cum sunt 
-              sintsed officiis voluptatum ut galisum cupiditate ea sint.Lorem ipsum dolor sit amet. Aut 
-              pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas accusamus 
-              id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate 
-              ea sint.Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. 
-              Qui quasi Quis sit voluptas accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed 
-              officiis voluptatum ut galisum cupiditate ea sint.Lorem ipsum dolor sit amet. Aut pariatur dolores 
-              eum quod dolores est molestias earum. Qui quasi Quis sit voluptas accusamus id iure sequi. 
-              Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint...
-              </p>
-              
-            </div>
+              <p id="entry-content">Content goes here</p>
             </div>
           </div>
-          
-          <div class="chat-bubble">
-          <img src="/static/images/ai-chat.svg" class="profile" alt="ai-icon">
+        </div>
+
+        <!-- AI's meme chat bubble -->
+        <div class="chat-bubble" id="ai-chat">
+          <img src="{{ url_for('static', filename='images/ai-chat.svg') }}" class="profile" alt="ai-icon">
           <div class="col">
             <div class="col-header">
-            <span class="time">02:22 AM</span>
+              <span class="time" id="meme-date">Date/time goes here</span>
             </div>
-            <img src="/static/images/meme-sample.png" class="meme-response rounded" alt="meme-response">
-            </div>
+            <img src="" class="meme-response rounded" alt="meme-response" id="meme-image" style="display:none;">
           </div>
-          
         </div>
         </div>
         
@@ -141,9 +113,9 @@
       <a href="{{ url_for('dashboard.dashboard') }}" class="book-link">
         <img src="{{ url_for('static', filename='images/journal-book.png') }}" alt="Journal Book" class="book-image">
       </a>
-      -->
-      
+      --> 
     </div>
+
       <div class="modal" id="newEntryModal">
         <div class="modal-content">
           <div class="modal-title">Create a New Journal Entry</div>
@@ -165,12 +137,40 @@
   
 <script>
   function selectItem(element) {
-  document.querySelectorAll('.entry-item').forEach(item => {
-    item.classList.remove('selected');
-  });
-  
-  element.classList.add('selected');
-}
+    document.querySelectorAll('.entry-item').forEach(item => {
+      item.classList.remove('selected');
+    });
+
+    element.classList.add('selected');
+
+    // Get data from clicked entry
+    const title = element.dataset.title;
+    const content = element.dataset.content;
+    const date = element.dataset.date;
+    const meme = element.dataset.meme;
+
+    // Update right panel - "You" bubble
+    const youBubble = document.querySelector('.chat-bubble:nth-of-type(1)'); // first chat-bubble
+    if (youBubble) {
+      youBubble.querySelector('.col-header .title').textContent = title || "You";
+      youBubble.querySelector('.col-header .time').textContent = date || "";
+      youBubble.querySelector('.col-content p').textContent = content || "";
+    }
+
+    // Update right panel - "AI" bubble
+    const aiBubble = document.querySelector('.chat-bubble:nth-of-type(2)'); // second chat-bubble
+    if (aiBubble) {
+      aiBubble.querySelector('.col-header .time').textContent = date || "";
+      const memeImg = aiBubble.querySelector('img.meme-response');
+      if (meme && memeImg) {
+        memeImg.src = meme;
+        memeImg.style.display = "block";
+      } else if (memeImg) {
+        memeImg.style.display = "none";
+      }
+    }
+  }
+
  
  // MODAL
  const modal = document.getElementById("newEntryModal");
