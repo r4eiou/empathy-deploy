@@ -53,13 +53,18 @@
   <div class="container dashboard">
     <div class="left-panel dashboard">
       <div class="search-bar rounded">
-          <input type="text" class="rounded" placeholder="Search your entries..." aria-label="Search">
-          <button onclick=""><i class="bi bi-search"></i></button>
+          <!-- <input type="text" class="rounded" placeholder="Search your entries..." aria-label="Search">
+          <button onclick=""><i class="bi bi-search"></i></button> -->
+
+          <form method="GET" action="{{ url_for('dashboard.dashboard') }}" class="search-bar">
+            <input type="text" name="search" class="rounded" placeholder="Search your entries..." aria-label="Search" value="{{ search_query or '' }}">
+            <button type="submit"><i class="bi bi-search"></i></button>
+          </form>
       </div>
 
       <div class="entries-panel">
         {% for entry in entries %}
-        <div class="entry-item rounded" onclick="selectItem(this)"
+        <div class="entry-item rounded {% if loop.first %}selected{% endif %}" onclick="selectItem(this)"
             data-title="{{ entry.title|e }}"
             data-content="{{ entry.content|e }}"
             data-date="{{ entry.date }}"

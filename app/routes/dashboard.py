@@ -100,5 +100,20 @@ def dashboard():
         else:
             flash("Please fill in all fields", "error")
 
-    entries = list(mongo.db.journal_entries.find({"user_id": session["user_id"]}))
-    return render_template("dashboard.html", entries=entries)
+    # entries = list(mongo.db.journal_entries.find({"user_id": session["user_id"]}))
+    # return render_template("dashboard.html", entries=entries)
+
+    search_query = request.args.get("search", "").strip()
+    if search_query:
+        entries = list(
+            mongo.db.journal_entries.find({
+                "user_id": session["user_id"],
+                "title": {"$regex": search_query, "$options": "i"}
+            })
+        )
+    else:
+        entries = list(
+            mongo.db.journal_entries.find({"user_id": session["user_id"]})
+        )
+
+    return render_template("dashboard.html", entries=entries, search_query=search_query)

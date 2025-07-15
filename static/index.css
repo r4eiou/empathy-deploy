@@ -627,6 +627,8 @@ form button:hover {
   cursor: pointer;
 
   transition: 1s background-color, color;
+
+  margin-top: -5px;
 }
 
 .search-bar button:hover {
