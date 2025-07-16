@@ -19,3 +19,21 @@ def entry(entry_id):
         return redirect(url_for("allEntries.allEntries"))
 
     return render_template("entry.html", entry=entry)
+
+
+@entry_bp.route("/entry/<entry_id>/delete", methods=["POST"])
+def delete_entry(entry_id):
+    if "user_id" not in session:
+        return redirect(url_for("auth.index"))
+    
+    result = mongo.db.journal_entries.delete_one({
+        "_id": ObjectId(entry_id),
+        "user_id": session["user_id"]
+    })
+
+    if result.deleted_count == 0:
+        flash("Entry could not be deleted or was not found.", "error")
+    else:
+        flash("Entry deleted successfully.", "success")
+    
+    return redirect(url_for("allEntries.allEntries"))
