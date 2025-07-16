@@ -64,59 +64,17 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-url="{{ url_for('entry.entry') }}">
+                    {% for entry in entries %}
+                    <tr data-url="{{ url_for('entry.entry', entry_id=entry['_id'])}}">
                         <td class="icon"><i class="bi bi-star"></i></td>
-                        <td class="title">TitleText</td>
-                        <td class="date">26th July, 2022</td> 
+                        <td class="title">{{ entry.title }}</td>
+                        <td class="date">{{ entry.date }}</td> 
                     </tr>
-                    <tr data-url="{{ url_for('entry.entry') }}">
-                        <td class="icon"><i class="bi bi-star"></i></td>
-                        <td class="title">TitleText</td>
-                        <td class="date">26th July, 2022</td> 
-                    </tr>
-                    <tr data-url="{{ url_for('entry.entry') }}">
-                        <td class="icon"><i class="bi bi-star"></i></td>
-                        <td class="title">TitleText</td>
-                        <td class="date">26th July, 2022</td> 
-                    </tr>
-                    <tr data-url="{{ url_for('entry.entry') }}">
-                        <td class="icon"><i class="bi bi-star"></i></td>
-                        <td class="title">TitleText</td>
-                        <td class="date">26th July, 2022</td> 
-                    </tr>
-                    <tr data-url="{{ url_for('entry.entry') }}">
-                        <td class="icon"><i class="bi bi-star"></i></td>
-                        <td class="title">TitleText</td>
-                        <td class="date">26th July, 2022</td> 
-                    </tr>
-                    <tr data-url="{{ url_for('entry.entry') }}">
-                        <td class="icon"><i class="bi bi-star"></i></td>
-                        <td class="title">TitleText</td>
-                        <td class="date">26th July, 2022</td> 
-                    </tr>
-                    <tr data-url="{{ url_for('entry.entry') }}">
-                        <td class="icon"><i class="bi bi-star"></i></td>
-                        <td class="title">TitleText</td>
-                        <td class="date">26th July, 2022</td> 
-                    </tr>
-                    <tr data-url="{{ url_for('entry.entry') }}">
-                        <td class="icon"><i class="bi bi-star"></i></td>
-                        <td class="title">TitleText</td>
-                        <td class="date">26th July, 2022</td> 
-                    </tr>
-                    <tr data-url="{{ url_for('entry.entry') }}">
-                        <td class="icon"><i class="bi bi-star"></i></td>
-                        <td class="title">TitleText</td>
-                        <td class="date">26th July, 2022</td> 
-                    </tr>
-                    
-                    <!--{% for entry in entries %}
+                    {% else %}
                     <tr>
-                        <td>{{ entry.title }}</td>
-                        <td>{{ entry.date.strftime('%B %d, %Y') }}</td>
-                        <td>{{ entry.content[:100] }}...</td>
+                        <td colspan="3">No entries yet.</td>
                     </tr>
-                    {% endfor %} -->
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

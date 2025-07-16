@@ -52,22 +52,11 @@
         <div class="modal rounded visible" id="viewEntryModal">
         <div class="modal-content">
             <div class="col">
-                <span id="title">TitleText</span>
-                <span id="date">July 25, 2025</span>
+                <span id="title">{{ entry.title }}</span>
+                <span id="date">{{ entry.date }}</span>
             </div>
             <p id="content">
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint.
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint. 
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint.
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint.
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint.
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint.
+                {{ entry.content }} </p>
             <div class="button-container">
               <i id="modal-favorite" class="bi bi-star"></i>
               <i id="modal-delete" class="bi bi-trash3"></i>
