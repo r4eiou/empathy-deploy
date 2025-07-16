@@ -52,22 +52,11 @@
         <div class="modal rounded visible" id="viewEntryModal">
         <div class="modal-content">
             <div class="col">
-                <span id="title">TitleText</span>
-                <span id="date">July 25, 2025</span>
+                <span id="title">{{ entry.title }}</span>
+                <span id="date">{{ entry.date }}</span>
             </div>
             <p id="content">
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint.
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint. 
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint.
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint.
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint.
-                Lorem ipsum dolor sit amet. Aut pariatur dolores eum quod dolores est molestias earum. Qui quasi Quis sit voluptas 
-                accusamus id iure sequi. Nam maiores explicabo cum sunt sintsed officiis voluptatum ut galisum cupiditate ea sint.
+                {{ entry.content }} </p>
             <div class="button-container">
               <i id="modal-favorite" class="bi bi-star"></i>
               <i id="modal-delete" class="bi bi-trash3"></i>
@@ -77,10 +66,10 @@
 
         <div class="modal" id="deleteEntryModal">
         <div class="modal-content">
-          <div class="modal-title">Are you sure you want to delete this entry?</div>
-          <p>
-            This action cannot be undone. Please confirm if you want to proceed with the deletion.
-          </p>
+            <div class="modal-title">Are you sure you want to delete this entry?</div>
+            <p>
+              This action cannot be undone. Please confirm if you want to proceed with the deletion.
+            </p>
             <div class="button-container">
               <button class="btn-secondary" id="modal-cancel">Cancel</button>
               <button class="btn-primary" type="submit" id="modal-save">Delete</button>
@@ -137,6 +126,27 @@
         delete_modal.classList.remove("visible");
     }
     });
+
+    document.getElementById("modal-save").addEventListener("click", function () {
+    fetch(`{{ url_for('entry.delete_entry', entry_id=entry._id) }}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Requested-With": "XMLHttpRequest"
+      }
+    })
+    .then(response => {
+      if (response.redirected) {
+        window.location.href = response.url; // Redirect to allEntries after deletion
+      } else {
+        alert("Failed to delete entry.");
+      }
+    })
+    .catch(error => {
+      console.error("Error deleting entry:", error);
+    });
+  });
+
 </script>
 </body>
 </html>
