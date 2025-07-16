@@ -80,6 +80,8 @@ def dashboard():
             top_emotion_label = predicted[0]['label'].lower()
             basic_emotion = GOEMOTIONS_TO_BASIC.get(top_emotion_label, "neutral")
 
+            print(f"[DEBUG] Basic Emotion Detected: {basic_emotion}") # debugging output
+
             # Step 2: Select random meme path from loaded JSON
             meme_list = meme_mapping.get(basic_emotion, [])
             meme_path = random.choice(meme_list) if meme_list else ""
