@@ -111,11 +111,11 @@ def dashboard():
             mongo.db.journal_entries.find({
                 "user_id": session["user_id"],
                 "title": {"$regex": search_query, "$options": "i"}
-            })
+            }).sort("_id", -1)
         )
     else:
         entries = list(
-            mongo.db.journal_entries.find({"user_id": session["user_id"]})
+            mongo.db.journal_entries.find({"user_id": session["user_id"]}).sort("_id", -1)
         )
 
     return render_template("dashboard.html", entries=entries, search_query=search_query)
