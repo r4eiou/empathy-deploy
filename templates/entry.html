@@ -58,7 +58,7 @@
             <p id="content">
                 {{ entry.content }} </p>
             <div class="button-container">
-              <i id="modal-favorite" class="bi bi-star"></i>
+              <i id="modal-favorite" class="bi {% if entry.isFavorite %}bi-star-fill{% else %}bi-star{% endif %}"></i>
               <i id="modal-delete" class="bi bi-trash3"></i>
             </div>
         </div>
@@ -84,23 +84,23 @@
 
 <script>
   function favoriteEntry(element) {
-    // TODO: save favorite status in DB
-    if (element.classList.contains('bi-star')) {
-        // Currently unfavorited, make it favorited
-        element.classList.remove('bi-star');
-        element.classList.add('bi-star-fill');
-    } else if (element.classList.contains('bi-star-fill')) {
-        // Currently favorited, make it unfavorited
-        element.classList.remove('bi-star-fill');
-        element.classList.add('bi-star');
+      // TODO: save favorite status in DB
+      if (element.classList.contains('bi-star')) {
+          // Currently unfavorited, make it favorited
+          element.classList.remove('bi-star');
+          element.classList.add('bi-star-fill');
+      } else if (element.classList.contains('bi-star-fill')) {
+          // Currently favorited, make it unfavorited
+          element.classList.remove('bi-star-fill');
+          element.classList.add('bi-star');
+      }
     }
 
-    }
     function deleteEntry(element) {
-    // TODO: delete entry in DB
-    if (element.classList.contains('bi-trash3')) {
-        delete_modal.classList.add("visible");
-    }
+      // TODO: delete entry in DB
+      if (element.classList.contains('bi-trash3')) {
+          delete_modal.classList.add("visible");
+      }
     }
 
     document.getElementById('modal-favorite').addEventListener('click', function() {
@@ -116,37 +116,62 @@
     const btnCancel = document.getElementById("modal-cancel");
 
     btnCancel.addEventListener("click", ()=> {
-    event.preventDefault();
-    event.stopPropagation();
-    delete_modal.classList.remove("visible");
+      event.preventDefault();
+      event.stopPropagation();
+      delete_modal.classList.remove("visible");
     })
 
     delete_modal.addEventListener("click", (event) => {
-    if (event.target === delete_modal) {
-        delete_modal.classList.remove("visible");
-    }
+      if (event.target === delete_modal) {
+          delete_modal.classList.remove("visible");
+      }
     });
 
     document.getElementById("modal-save").addEventListener("click", function () {
-    fetch(`{{ url_for('entry.delete_entry', entry_id=entry._id) }}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Requested-With": "XMLHttpRequest"
-      }
-    })
-    .then(response => {
-      if (response.redirected) {
-        window.location.href = response.url; // Redirect to allEntries after deletion
-      } else {
-        alert("Failed to delete entry.");
-      }
-    })
-    .catch(error => {
-      console.error("Error deleting entry:", error);
+      fetch(`{{ url_for('entry.delete_entry', entry_id=entry._id) }}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest"
+        }
+      })
+      .then(response => {
+        if (response.redirected) {
+          window.location.href = response.url; // Redirect to allEntries after deletion
+        } else {
+          alert("Failed to delete entry.");
+        }
+      })
+      .catch(error => {
+        console.error("Error deleting entry:", error);
+      });
     });
-  });
 
+    document.getElementById('modal-favorite').addEventListener('click', function() {
+      fetch(`{{ url_for('entry.toggle_favorite', entry_id=entry._id) }}`, {
+          method: "POST",
+          headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest"
+          }
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.success) {
+              const starIcon = document.getElementById('modal-favorite');
+              if (data.isFavorite) {
+                  starIcon.classList.remove('bi-star');
+                  starIcon.classList.add('bi-star-fill');
+              } else {
+                  starIcon.classList.remove('bi-star-fill');
+                  starIcon.classList.add('bi-star');
+              }
+          } else {
+              alert("Failed to update favorite status.");
+          }
+      })
+      .catch(err => console.error(err));
+    });
 </script>
 </body>
 </html>

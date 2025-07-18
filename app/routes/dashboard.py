@@ -94,7 +94,8 @@ def dashboard():
                 "content": content,
                 "meme": meme_path,
                 "emotion": basic_emotion,
-                "date": datetime.now().strftime("%B %d, %Y %I:%M %p")
+                "date": datetime.now().strftime("%B %d, %Y %I:%M %p"),
+                "isFavorite": False  # default state
             })
 
             flash(f"Entry created with {basic_emotion} meme!", "success")

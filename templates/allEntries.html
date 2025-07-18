@@ -66,7 +66,9 @@
                 <tbody>
                     {% for entry in entries %}
                     <tr data-url="{{ url_for('entry.entry', entry_id=entry['_id'])}}">
-                        <td class="icon"><i class="bi bi-star"></i></td>
+                        <td class="icon">
+                          <i class="bi {% if entry.isFavorite %}bi-star-fill{% else %}bi-star{% endif %} favorite-icon" data-id="{{ entry['_id'] }}" style="cursor: pointer;"></i>
+                        </td>
                         <td class="title">{{ entry.title }}</td>
                         <td class="date">{{ entry.date }}</td> 
                     </tr>
@@ -84,31 +86,54 @@
     
   
 <script>
-  function favoriteEntry(element) {
-    // TODO: save favorite status
-    if (element.classList.contains('bi-star')) {
-        // Currently unfavorited, make it favorited
-        element.classList.remove('bi-star');
-        element.classList.add('bi-star-fill');
-    } else if (element.classList.contains('bi-star-fill')) {
-        // Currently favorited, make it unfavorited
-        element.classList.remove('bi-star-fill');
-        element.classList.add('bi-star');
+window.addEventListener('pageshow', event => {
+    if (event.persisted) {
+      // Page was loaded from back-forward cache (bfcache), reload to fetch updated data
+      window.location.reload();
     }
-}
+  });
 
-// NOTE: temporarily put url to dashboard
-document.querySelectorAll('.entries-table tbody tr').forEach(tr => {
-    tr.addEventListener('click', function(e) {
-        // Check if clicked element is a star icon
-        if (e.target.classList.contains('bi-star') || e.target.classList.contains('bi-star-fill')) {
-            favoriteEntry(e.target);
+document.querySelectorAll('.favorite-icon').forEach(icon => {
+  icon.addEventListener('click', function(e) {
+    e.stopPropagation(); // Prevent row click navigation
+
+    const entryId = this.dataset.id;
+    const starIcon = this;
+
+    fetch(`/toggle_favorite/${entryId}`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        if (data.isFavorite) {
+          starIcon.classList.remove('bi-star');
+          starIcon.classList.add('bi-star-fill');
         } else {
-            // Navigate to the URL
-            window.location.href = this.dataset.url;
+          starIcon.classList.remove('bi-star-fill');
+          starIcon.classList.add('bi-star');
         }
-    });
+      } else {
+        alert(data.error || 'Failed to update favorite status.');
+      }
+    })
+    .catch(err => console.error(err));
+  });
+});
+
+document.querySelectorAll('.entries-table tbody tr').forEach(tr => {
+  tr.addEventListener('click', function(e) {
+    if (e.target.classList.contains('favorite-icon')) {
+      return; // Don't navigate if star icon clicked
+    }
+    window.location.href = this.dataset.url;
+  });
 });
 </script>
+
 </body>
 </html>

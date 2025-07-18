@@ -37,3 +37,26 @@ def delete_entry(entry_id):
         flash("Entry deleted successfully.", "success")
     
     return redirect(url_for("allEntries.allEntries"))
+
+@entry_bp.route("/entry/<entry_id>/toggle_favorite", methods=["POST"])
+def toggle_favorite(entry_id):
+    if "user_id" not in session:
+        return redirect(url_for("auth.index"))
+
+    entry = mongo.db.journal_entries.find_one({
+        "_id": ObjectId(entry_id),
+        "user_id": session["user_id"]
+    })
+
+    if not entry:
+        flash("Entry not found.", "error")
+        return redirect(url_for("allEntries.allEntries"))
+
+    new_fav_status = not entry.get("isFavorite", False)
+
+    mongo.db.journal_entries.update_one(
+        {"_id": ObjectId(entry_id)},
+        {"$set": {"isFavorite": new_fav_status}}
+    )
+
+    return {"success": True, "isFavorite": new_fav_status}
