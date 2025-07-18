@@ -42,7 +42,7 @@
 
   <!-- Back Button -->
   <div class="back-button">
-  <a href="javascript:history.back()">
+  <a href="{{ url_for('journal.page') }}">
     <img src="{{ url_for('static', filename='images/back-button.svg') }}" class="back-img">
   </a>
 </div>
