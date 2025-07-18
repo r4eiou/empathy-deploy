@@ -60,7 +60,7 @@
         <div class="meme-grid">
             {% for meme in memes %}
             <div class="meme-item">
-                <img src="{{ url_for('static', filename='memes/' ~ meme) }}" alt="Meme" class="meme-img">
+                <img src="{{ url_for('static', filename=meme) }}" alt="Meme" class="meme-img">
             </div>
             {% else %}
             <p>No memes yet.</p>

@@ -29,28 +29,17 @@ def page():
     #
     # This approach is temporary and designed to help populate UI without a full upload system yet.
     # In production, this logic should be removed or replaced with actual meme creation/upload functionality.
-    if "memes" not in user or not user["memes"]:
-        default_memes = [
-            "meme-1.png",
-            "meme-2.png",
-            "meme-3.png",
-            "meme-4.png"
-        ]
+    # Get meme paths from journal_entries for this user
+    entries = mongo.db.journal_entries.find({"user_id": session["user_id"]})
+    memes = list({entry.get("meme") for entry in entries if entry.get("meme")})
 
-        # Update the current user's document in MongoDB with the default memes
-        mongo.db.users.update_one(
-            {"_id": user_id},
-            {"$set": {"memes": default_memes}}
-        )
+    print("[DEBUG] User memes from journal_entries:", memes)
 
-        # Also update the local variable so we pass the updated memes to the template
-        user["memes"] = default_memes
-
-        print("[DEBUG] Default memes added to user.")
-
-    # Get the list of memes to pass to the profile.html template
-    memes = user["memes"]
-    print("[DEBUG] User memes:", memes)
+    # Optional: update user document with the memes for caching/future use
+    mongo.db.users.update_one(
+        {"_id": user_id},
+        {"$set": {"memes": memes}}
+    )
 
     return render_template("profile.html",
         memes=memes,
