@@ -38,4 +38,4 @@ def toggle_favorite(entry_id):
         {"$set": {"isFavorite": new_fav_status}}
     )
 
-    return {"success": True, "isFavorite": new_fav_status}
+    return jsonify({"success": True, "isFavorite": new_fav_status})

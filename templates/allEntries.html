@@ -86,53 +86,77 @@
     
   
 <script>
-window.addEventListener('pageshow', event => {
+  window.addEventListener('pageshow', event => {
     if (event.persisted) {
-      // Page was loaded from back-forward cache (bfcache), reload to fetch updated data
       window.location.reload();
     }
   });
 
-document.querySelectorAll('.favorite-icon').forEach(icon => {
-  icon.addEventListener('click', function(e) {
-    e.stopPropagation(); // Prevent row click navigation
+  // Helper: Move row to top of tbody
+  function moveRowToTop(row) {
+    const tbody = row.parentNode;
+    tbody.insertBefore(row, tbody.firstChild);
+  }
 
-    const entryId = this.dataset.id;
-    const starIcon = this;
-
-    fetch(`/toggle_favorite/${entryId}`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Requested-With': 'XMLHttpRequest'
-      }
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        if (data.isFavorite) {
-          starIcon.classList.remove('bi-star');
-          starIcon.classList.add('bi-star-fill');
-        } else {
-          starIcon.classList.remove('bi-star-fill');
-          starIcon.classList.add('bi-star');
-        }
-      } else {
-        alert(data.error || 'Failed to update favorite status.');
-      }
-    })
-    .catch(err => console.error(err));
-  });
-});
-
-document.querySelectorAll('.entries-table tbody tr').forEach(tr => {
-  tr.addEventListener('click', function(e) {
-    if (e.target.classList.contains('favorite-icon')) {
-      return; // Don't navigate if star icon clicked
+  // Helper: Move row below all favorite rows
+  function moveRowBelowFavorites(row) {
+    const tbody = row.parentNode;
+    const allRows = Array.from(tbody.querySelectorAll('tr'));
+    // Find last favorite row
+    const lastFavRow = allRows.reverse().find(r =>
+      r.querySelector('.favorite-icon').classList.contains('bi-star-fill')
+    );
+    if (lastFavRow) {
+      tbody.insertBefore(row, lastFavRow.nextSibling);
+    } else {
+      // No favorites, append to end
+      tbody.appendChild(row);
     }
-    window.location.href = this.dataset.url;
+  }
+
+  // Toggle favorite icon & reorder rows dynamically
+  document.querySelectorAll('.favorite-icon').forEach(icon => {
+    icon.addEventListener('click', function (e) {
+      e.stopPropagation(); // Prevent row navigation
+
+      const entryId = this.dataset.id;
+      const starIcon = this;
+      const row = starIcon.closest('tr');
+
+      fetch(`/toggle_favorite/${entryId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      })
+        .then(res => res.json())
+        .then(data => {
+          if (data.success) {
+            if (data.isFavorite) {
+              starIcon.classList.remove('bi-star');
+              starIcon.classList.add('bi-star-fill');
+              moveRowToTop(row);
+            } else {
+              starIcon.classList.remove('bi-star-fill');
+              starIcon.classList.add('bi-star');
+              moveRowBelowFavorites(row);
+            }
+          } else {
+            alert(data.error || 'Failed to update favorite status.');
+          }
+        })
+        .catch(err => console.error(err));
+    });
   });
-});
+
+  // Row click navigates to entry page (except star icon)
+  document.querySelectorAll('.entries-table tbody tr').forEach(tr => {
+    tr.addEventListener('click', function (e) {
+      if (e.target.classList.contains('favorite-icon')) return;
+      window.location.href = this.dataset.url;
+    });
+  });
 </script>
 
 </body>
