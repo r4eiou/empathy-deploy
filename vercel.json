@@ -1,3 +1,14 @@
 {
-    "rewrites": [{ "source": "/(.*)", "destination": "/entry.html" }]
+    "builds": [
+    {
+        "src": "journal.html",
+        "use": "@vercel/python"
+    }
+    ],
+    "routes": [
+        {
+            "src": "/(.*)",
+            "dest": "/journal.html"
+        }
+    ]
 }
