@@ -8,11 +8,17 @@ from datetime import datetime
 from bson import ObjectId
 
 # Load the model using HuggingFace pipeline
-classifier = pipeline(
-    task="text-classification",
-    model="SamLowe/roberta-base-go_emotions",
-    top_k=None  # Return all label probabilities (multi-label)
-)
+classifier = None
+
+def get_classifier():
+    global classifier
+    if classifier is None:
+        classifier = pipeline(
+            task="text-classification",
+            model="SamLowe/roberta-base-go_emotions",
+            top_k=None
+        )
+    return classifier
 
 # Basic emotion mapping dictionary (6 basic emotions + neutral)
 GOEMOTIONS_TO_BASIC = {
@@ -75,7 +81,7 @@ def dashboard():
 
         if title and content:
             # Step 1: Run classifier on content
-            model_outputs = classifier([content])
+            model_outputs = get_classifier()([content])
             predicted = sorted(model_outputs[0], key=lambda x: x['score'], reverse=True)
             top_emotion_label = predicted[0]['label'].lower()
             basic_emotion = GOEMOTIONS_TO_BASIC.get(top_emotion_label, "neutral")
